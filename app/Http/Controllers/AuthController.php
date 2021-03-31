@@ -18,7 +18,7 @@ class AuthController extends Controller
 
         if($validator->fails())
         {
-            return response()->json(['status_code'=> 400, 'message'=>'Bad Request']);
+            return response()->json(['status'=> 400, 'message'=>'Bad Request']);
         }
 
         $credentials = request(['email','password']);
@@ -26,7 +26,7 @@ class AuthController extends Controller
         if(!Auth::attempt($credentials))
         {
             return response()->json([
-                'status_code' => 500 ,
+                'status' => 500 ,
                 'message' => 'Unauthorized'
             ]);
         } 
@@ -36,8 +36,8 @@ class AuthController extends Controller
         $tokenResult = $user->createToken('authtoken')->plainTextToken;
 
         return response()->json([
-            'status_code'   =>  200,
-            'token'         =>  $tokenResult
+            'status'   =>  200,
+            'token'    =>  $tokenResult
         ]);
         
     }
@@ -46,8 +46,8 @@ class AuthController extends Controller
     {
         Auth::user()->currentAccessToken()->delete();
         return response()->json([
-            'status_code'   =>  200,
-            'message'       =>  'Token Deleted Successfully'
+            'status'   =>  200,
+            'message'  =>  'Token Deleted Successfully'
         ]);
     }
 }

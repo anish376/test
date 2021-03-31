@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login','AuthController@login')->name('auth.login');
 
-
 Route::group(['middleware'=>['auth:sanctum']],function(){
+
+    Route::get('/search/{name}','SearchController@search')->name('search');
 
     Route::post('/logout','AuthController@logOut')->name('auth.logout');
 
